@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 // Modules
 import { ShareModule } from '../share/share.module';
 
-// Routes
+
 import { PAGES_ROUTES } from './pages.routes';
 
 // Components
