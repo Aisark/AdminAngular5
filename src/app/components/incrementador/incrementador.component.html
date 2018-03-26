@@ -1,0 +1,7 @@
+<div class="input-group">
+    <input #InputProgress name="progres" type="number" [(ngModel)]="value" (ngModelChange)="modelChange($event)" class="form-control" aria-describedby="basic-addon2" min="1" max="100">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="changeValue(-5)" type="button">menos</button>
+        <button class="btn btn-outline-secondary" (click)="changeValue(5)" type="button">mas</button>
+    </div>
+</div>

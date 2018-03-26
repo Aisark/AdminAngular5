@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 
 // Modules
 import { ShareModule } from '../share/share.module';
+import { FormsModule } from '@angular/forms';
 
-
+// Routes
 import { PAGES_ROUTES } from './pages.routes';
 
 // Components
@@ -13,13 +14,15 @@ import { Chart1Component } from './chart1/chart1.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     ShareModule,
-    PAGES_ROUTES
+    PAGES_ROUTES,
+    FormsModule
   ],
   declarations: [
     PagesComponent,
@@ -27,6 +30,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
     DashboardComponent,
     ProgressComponent,
     NopagefoundComponent,
+    IncrementadorComponent
   ],
   exports: [
     PagesComponent,
