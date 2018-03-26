@@ -7,15 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProgressComponent implements OnInit {
 
-  progess: number = 50;
+  // tslint:disable:no-inferrable-types
+  progess: number = 10;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  changeprogress(num: number) {
-
-  }
 
 }
