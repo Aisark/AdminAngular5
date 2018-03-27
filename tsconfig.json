@@ -14,6 +14,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["app/components/*"],
+      "@login/*": ["app/login/*"],
+      "@pages/*": ["app/pages/*"],
+      "@share/*": ["app/share/*"],
+      "@services/*": ["app/services/*"]
+    }
   }
 }
