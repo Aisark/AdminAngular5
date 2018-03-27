@@ -1,3 +1,32 @@
-<p>
-  chart1 works!
-</p>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <app-chartdonut [labels]="graficos.grafico1.labels" [datas]="graficos.grafico1.data" [type]="graficos.grafico1.type"></app-chartdonut>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <app-chartdonut [labels]="graficos.grafico2.labels" [datas]="graficos.grafico2.data" [type]="graficos.grafico2.type"></app-chartdonut>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <app-chartdonut [labels]="graficos.grafico3.labels" [datas]="graficos.grafico1.data" [type]="graficos.grafico1.type"></app-chartdonut>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <app-chartdonut [labels]="graficos.grafico4.labels" [datas]="graficos.grafico1.data" [type]="graficos.grafico1.type"></app-chartdonut>
+            </div>
+        </div>
+    </div>
+</div>
