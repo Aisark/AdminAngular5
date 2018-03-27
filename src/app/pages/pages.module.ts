@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Modules
-import { ShareModule } from '../share/share.module';
+import { ShareModule } from '@share/share.module';
 
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
@@ -16,8 +16,9 @@ import { Chart1Component } from './chart1/chart1.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
-import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
-import { ChartdonutComponent } from '../components/chartdonut/chartdonut.component';
+import { IncrementadorComponent } from '@components/incrementador/incrementador.component';
+import { ChartdonutComponent } from '@components/chartdonut/chartdonut.component';
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ChartdonutComponent } from '../components/chartdonut/chartdonut.compone
     ProgressComponent,
     NopagefoundComponent,
     IncrementadorComponent,
-    ChartdonutComponent
+    ChartdonutComponent,
+    AccountSettingComponent
   ],
   exports: [
     PagesComponent,

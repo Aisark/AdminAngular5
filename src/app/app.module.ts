@@ -6,6 +6,7 @@ import { APP_ROUTES } from './app.routes';
 
 // Modules
 import { PagesModule } from './pages/pages.module';
+import { ServicesModule } from '@services/services.module';
 
 // Temporal
 
@@ -25,6 +26,7 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     APP_ROUTES,
     PagesModule,
+    ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
