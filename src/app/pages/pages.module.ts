@@ -19,6 +19,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { IncrementadorComponent } from '@components/incrementador/incrementador.component';
 import { ChartdonutComponent } from '@components/chartdonut/chartdonut.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
     NopagefoundComponent,
     IncrementadorComponent,
     ChartdonutComponent,
-    AccountSettingComponent
+    AccountSettingComponent,
+    RxjsComponent
   ],
   exports: [
     PagesComponent,
