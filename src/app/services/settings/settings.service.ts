@@ -28,7 +28,7 @@ export class SettingsService {
 
   setTheme(tema: string) {
     const url: string = `assets/css/colors/${ tema }.css`;
-    this._document.getElementById('tema').setAttribute('href', tema);
+    this._document.getElementById('tema').setAttribute('href', url);
 
     this.ajustes.temaUrl = url;
     this.ajustes.tema = tema;
