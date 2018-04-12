@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Routes
 import { APP_ROUTES } from './app.routes';
@@ -7,7 +8,6 @@ import { APP_ROUTES } from './app.routes';
 // Modules
 import { PagesModule } from './pages/pages.module';
 import { ServicesModule } from '@services/services.module';
-import { FormsModule } from '@angular/forms';
 
 // Temporal
 
@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './login/register.component';
 import { LoginComponent } from './login/login.component';
+import { ImagenPipe } from './pipes/imagen.pipe';
 
 
 @NgModule({
@@ -22,13 +23,15 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    ImagenPipe,
   ],
   imports: [
     BrowserModule,
     APP_ROUTES,
     PagesModule,
     ServicesModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

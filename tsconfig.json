@@ -21,7 +21,9 @@
       "@login/*": ["app/login/*"],
       "@pages/*": ["app/pages/*"],
       "@share/*": ["app/share/*"],
-      "@services/*": ["app/services/*"]
+      "@services/*": ["app/services/*"],
+      "@models/*": ["app/models/*"],
+      "@config/*": ["app/config/*"]
     }
   }
 }
