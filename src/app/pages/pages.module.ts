@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 
 // Modules
 import { ShareModule } from '@share/share.module';
-
-import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
+
+// ng2-charts
+import { ChartsModule } from 'ng2-charts';
 
 // Routes
 import { PAGES_ROUTES } from './pages.routes';
+
+// Pipes
+import { PipesModule } from '@pipes/pipes.module';
 
 // Components
 import { PagesComponent } from './pages.component';
@@ -20,6 +24,7 @@ import { IncrementadorComponent } from '@components/incrementador/incrementador.
 import { ChartdonutComponent } from '@components/chartdonut/chartdonut.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -28,7 +33,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     ShareModule,
     PAGES_ROUTES,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    PipesModule
   ],
   declarations: [
     PagesComponent,
@@ -39,7 +45,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     IncrementadorComponent,
     ChartdonutComponent,
     AccountSettingComponent,
-    RxjsComponent
+    RxjsComponent,
+    ProfileComponent
   ],
   exports: [
     PagesComponent,

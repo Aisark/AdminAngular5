@@ -15,15 +15,14 @@ import { ServicesModule } from '@services/services.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './login/register.component';
 import { LoginComponent } from './login/login.component';
-import { ImagenPipe } from './pipes/imagen.pipe';
+import { PipesModule } from './pipes/pipes.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
-    ImagenPipe,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +30,8 @@ import { ImagenPipe } from './pipes/imagen.pipe';
     PagesModule,
     ServicesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

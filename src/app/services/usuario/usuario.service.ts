@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
 import 'rxjs/add/operator/map';
+import { UploadFilesService } from '@services/upload-files/upload-files.service';
 
 @Injectable()
 export class UsuarioService {
@@ -15,13 +16,17 @@ export class UsuarioService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    public _uploadFiles: UploadFilesService
   ) {
     this.loadFromLocalStorage();
    }
 
   islogin():  boolean { return this.token.length > 5; }
 
+  /**
+   * @description Cerrar sesión de usuario
+   */
   logOut() {
     this.usuario = null;
     this.token = '';
@@ -48,13 +53,13 @@ export class UsuarioService {
    * @description Guarda en el localStorage datos para inicio de sesión y validación
    * @param res {response} recive datos del usuario
    */
-  saveDataUser(res: any) {
-    localStorage.setItem('id', res.id);
-    localStorage.setItem('token', res.token);
-    localStorage.setItem('usuario', JSON.stringify(res.usuario));
+  saveDataUser(id: string, token: string, usuario: Usuario) {
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+    localStorage.setItem('usuario', JSON.stringify(usuario));
 
-    this.token = res.token;
-    this.usuario = res.usuario;
+    this.token = token;
+    this.usuario = usuario;
   }
 
   /**
@@ -65,7 +70,7 @@ export class UsuarioService {
     const url = `${URL_SERVICES}/login/google`;
     return this.http.post(url, {token})
                 .map( (res: any) => {
-                  this.saveDataUser(res);
+                  this.saveDataUser(res.usuario._id, res.token, res.usuario);
                   return true;
                 });
 }
@@ -97,8 +102,36 @@ export class UsuarioService {
     const url = `${URL_SERVICES}/login`;
     return this.http.post(url, usuario)
           .map( (res: any) => {
-            this.saveDataUser(res);
+            this.saveDataUser(res.usuario._id, res.token, res.usuario);
             return true;
+          });
+  }
+
+  /**
+   * @description Actualiza los datos de un usuario
+   * @param usuario {Usuario} usuario a actualizar
+   */
+  updateDataUSer(usuario: Usuario) {
+    const url = `${URL_SERVICES}/usuario/${usuario._id}?token=${this.token}`;
+    return this.http.put(url, usuario)
+              .map( (res: any) => {
+                this.saveDataUser(res.usuario._id, this.token, res.usuario);
+                Swal('Datos Actualizados', `Se actualizo el usuario: ${ usuario.nombre}`, 'success');
+                return true;
+              });
+  }
+
+  /**
+   * @description Actualizar la imagen del usuario
+   * @param file {File} archivo a subir
+   * @param id {string} id del usuario
+   */
+  changeImg( file: File, id: string) {
+    this._uploadFiles.uploadFile(file, 'usuarios', id)
+          .then( (res: any) => {
+            Swal('Datos Actualizados', `Se actualizo exitosamente la imagen`, 'success');
+            this.usuario.img = res.usuario.img;
+            this.saveDataUser(id, this.token, this.usuario);
           });
   }
 }
