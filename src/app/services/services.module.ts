@@ -9,6 +9,7 @@ import {
   LoginGuard,
   UploadFilesService
 } from './service.index';
+import { ModalUploadService } from '@components/modal-upload/modal-upload.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {
     SidebarService,
     UsuarioService,
     LoginGuard,
-    UploadFilesService
+    UploadFilesService,
+    ModalUploadService
   ]
 })
 export class ServicesModule { }

@@ -1,0 +1,88 @@
+<!-- #region Sección de la barra de busqueda de usuarios-->
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="findUsers(input.value)" type="text" class="form-control" placeholder="Buscr usuario..">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+<!-- #region Sección de pre-loading-->
+<div class="row animated fadeIn" *ngIf="preload">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+<!-- #region Seccion de la tabla de usuarios-->
+<div class="row animated fadeIn" *ngIf="!preload">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Usuarios registrados (<small>{{registerCount}}</small>) </h3>
+
+                <!-- #region Tabla de usuarios-->
+                <table class="table table-hover">
+                    <thead>
+                        <th>Imagen</th>
+                        <th>Correo</th>
+                        <th>Nombre</th>
+                        <th>Role</th>
+                        <th>Auth</th>
+                        <th></th>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios">
+                            <td class="w70">
+                                <img (click)="openModal(usuario._id)" [src]="usuario.img | imagen" class="img-circle img-50 pointer">
+                            </td>
+                            <td>
+                                {{usuario.nombre}}
+                            </td>
+                            <td>
+                                {{usuario.email}}
+                            </td>
+                            <td>
+                                <select [(ngModel)]="usuario.role" name="role">
+                                    <option value="ADMIN_ROLE">Administrador</option>
+                                    <option value="USER_ROLE">Usuario</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label class="label label-danger" *ngIf="usuario.google">Google</label>
+                                <label class="label label-primary" *ngIf="!usuario.google">Normal</label>
+                            </td>
+                            <td>
+
+                                <button class="btn btn-primary" (click)="saveUser(usuario)">
+                                    <i class="fa fa-save" ></i>
+                                </button>
+
+                                <button class="btn btn-danger" (click)="deleteUser(usuario)">
+                                    <i class="fa fa-trash-o" ></i>
+                                </button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- #endregion -->
+
+                <button (click)="changeRange(-5)" [disabled]="!toPrev" class="btn btn-secondary">Anteriores</button>
+                <button (click)="changeRange(5)" [disabled]="!toNext" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->

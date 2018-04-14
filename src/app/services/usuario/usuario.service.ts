@@ -22,6 +22,9 @@ export class UsuarioService {
     this.loadFromLocalStorage();
    }
 
+  /**
+   * @description Devuelve true si el usuario esta logeado
+   */
   islogin():  boolean { return this.token.length > 5; }
 
   /**
@@ -115,7 +118,9 @@ export class UsuarioService {
     const url = `${URL_SERVICES}/usuario/${usuario._id}?token=${this.token}`;
     return this.http.put(url, usuario)
               .map( (res: any) => {
-                this.saveDataUser(res.usuario._id, this.token, res.usuario);
+                if (usuario._id === this.usuario._id) {
+                  this.saveDataUser(res.usuario._id, this.token, res.usuario);
+                }
                 Swal('Datos Actualizados', `Se actualizo el usuario: ${ usuario.nombre}`, 'success');
                 return true;
               });
@@ -133,5 +138,32 @@ export class UsuarioService {
             this.usuario.img = res.usuario.img;
             this.saveDataUser(id, this.token, this.usuario);
           });
+  }
+
+  /**
+   * @description Busca usuarios en un rango dado
+   * @param range {number} El rango para buscar usuarios
+   */
+  loadUsers (range: number = 0) {
+    const url = `${URL_SERVICES}/usuario?range=${range}`;
+    return this.http.get(url);
+  }
+
+  /**
+   * @description Busca un termino en la colección de usuarios
+   * @param termino {string} El termino que se debe buscar
+   */
+  findColecction(termino: string) {
+    const url = `${URL_SERVICES}/busqueda/coleccion/usuarios/${termino}`;
+    return this.http.get(url).map( (res: any) => res.usuarios);
+  }
+
+  deleteUser(id: string) {
+    const url = `${URL_SERVICES}/usuario/${id}?token=${this.token}`;
+
+    return this.http.delete(url)
+            .map( (res: any) => {
+              Swal('Datos Actualizados', `El usuario ${ res.usuario.nombre} ha sido borrado`, 'success');
+            });
   }
 }

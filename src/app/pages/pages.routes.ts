@@ -7,6 +7,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { Chart1Component } from './chart1/chart1.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginGuard } from '@services/service.index';
+import { UsuarioComponent } from '@pages/usuario/usuario.component';
 
 const pagesRoutes: Routes = [
     {
@@ -17,6 +18,8 @@ const pagesRoutes: Routes = [
             { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard'} },
             { path: 'progress', component: ProgressComponent, data: { titulo: 'Barra de progreso'} },
             { path: 'charts', component: Chart1Component, data: { titulo: 'Gráficas'} },
+            // Mantenimiento
+            {path: 'usuarios', component: UsuarioComponent, data: {titulo: 'Mantenimiento de suarios'}},
             { path: 'profile', component: ProfileComponent, data: { titulo: 'Perfil de usuario'} },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
         ]

@@ -25,6 +25,8 @@ import { ChartdonutComponent } from '@components/chartdonut/chartdonut.component
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { ModalUploadComponent } from '@components/modal-upload/modal-upload.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { ProfileComponent } from './profile/profile.component';
     ChartdonutComponent,
     AccountSettingComponent,
     RxjsComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsuarioComponent,
+    ModalUploadComponent
   ],
   exports: [
     PagesComponent,
