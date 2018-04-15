@@ -1,0 +1,82 @@
+<!-- #region Sección de la barra de busqueda de usuarios-->
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="findMedicos(input.value)" type="text" class="form-control" placeholder="Buscar médicos..">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+<!-- #region Sección de pre-loading-->
+<div class="row animated fadeIn" *ngIf="preload">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+<!-- #region Seccion de la tabla de usuarios-->
+<div class="row animated fadeIn" *ngIf="!preload">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button type="button" [routerLink]="['/medico','nuevo']" class="btn waves-effect waves-light btn-rounded btn-primary">
+                      <i class="fa fa-plus"></i> Crear Médico
+                  </button>
+                </div>
+
+                <h3 class="card-title">Médicos registrados (<small>{{_medicoServices.totalMedicos}}</small>) </h3>
+
+                <!-- #region Tabla de usuarios-->
+                <table class="table table-hover">
+                    <thead>
+                        <th>Foto</th>
+                        <th>Médico</th>
+                        <th>Hospital</th>
+                        <th></th>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let medico of medicos">
+                            <td class="w70">
+                                <img [src]="medico.img | imagen:'medico'" class="img-circle img-50 pointer">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="medico.nombre" class="form-control" type="text" name="nombre">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="medico.hospital.nombre" class="form-control" type="text" name="hospital">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" [routerLink]="['/medico', medico._id]">
+                                <i class="fa fa-save" ></i>
+                            </button>
+
+                                <button class="btn btn-danger" (click)="deleteMedico(medico)">
+                                <i class="fa fa-trash-o" ></i>
+                            </button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- #endregion -->
+
+                <button (click)="changeRange(-5)" class="btn btn-secondary">Anteriores</button>
+                <button (click)="changeRange(5)" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
