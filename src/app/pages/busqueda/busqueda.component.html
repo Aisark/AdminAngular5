@@ -1,0 +1,99 @@
+<div class="row animated fadeIn">
+
+    <!-- #region Seccion de la tabla de medicos-->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title">Médicos</h3>
+
+                <!-- #region Tabla de medicos-->
+                <table class="table table-hover">
+                    <tbody>
+                        <tr *ngFor="let medico of medicos">
+                            <td class="w70">
+                                <img [src]="medico.img | imagen:'medico'" class="img-circle img-50 pointer">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="medico.nombre" class="form-control" type="text" name="nombre">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" [routerLink]="['/medico', medico._id]">
+                                  <i class="fa fa-edit" ></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- #endregion -->
+            </div>
+        </div>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Seccion de la tabla de hospitales-->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title">hospitales</h3>
+
+                <!-- #region Tabla de hospitales-->
+                <table class="table table-hover">
+
+                    <tbody>
+                        <tr *ngFor="let hospital of hospitales">
+                            <td class="w70">
+                                <img [src]="hospital.img | imagen:'hospital'" class="img-circle img-50 pointer">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="hospital.nombre" class="form-control" type="text" name="nombre">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" routerLink="'/hospital'">
+                                  <i class="fa fa-edit" ></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- #endregion -->
+            </div>
+        </div>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Seccion de la tabla de usuarios-->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title">usuarios</h3>
+
+                <!-- #region Tabla de usuarios-->
+                <table class="table table-hover">
+
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios">
+                            <td class="w70">
+                                <img [src]="usuario.img | imagen:'usuario'" class="img-circle img-50 pointer">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="usuario.nombre" class="form-control" type="text" name="nombre">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" routerLink="'/usuario'">
+                                  <i class="fa fa-edit" ></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- #endregion -->
+            </div>
+        </div>
+    </div>
+    <!-- #endregion -->
+
+
+</div>

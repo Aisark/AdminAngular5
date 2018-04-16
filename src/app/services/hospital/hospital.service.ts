@@ -34,7 +34,7 @@ export class HospitalService {
   getAllHospitals() {
     const url = `${URL_SERVICES}/hospital/all`;
     return this.http.get(url)
-                  .map( (res: any) => res.hospital);
+                  .map( (res: any) => res.hospitales);
   }
 
   /**

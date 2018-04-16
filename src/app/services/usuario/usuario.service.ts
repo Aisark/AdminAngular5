@@ -5,7 +5,11 @@ import { URL_SERVICES } from '@config/config';
 import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
+
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 import { UploadFilesService } from '@services/upload-files/upload-files.service';
 
 @Injectable()
@@ -13,6 +17,7 @@ export class UsuarioService {
 
   usuario: Usuario;
   token: string;
+  menu: any[] = [];
 
   constructor(
     private http: HttpClient,
@@ -33,7 +38,8 @@ export class UsuarioService {
   logOut() {
     this.usuario = null;
     this.token = '';
-
+    this.menu = [];
+    localStorage.removeItem('menu');
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     this.router.navigate(['/login']);
@@ -46,9 +52,11 @@ export class UsuarioService {
     if (localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
       this.usuario = JSON.parse(localStorage.getItem('usuario'));
+      this.menu = JSON.parse(localStorage.getItem('menu'));
     }else {
       this.token = '';
       this.usuario = null;
+      this.menu = [];
     }
   }
 
@@ -56,13 +64,14 @@ export class UsuarioService {
    * @description Guarda en el localStorage datos para inicio de sesión y validación
    * @param res {response} recive datos del usuario
    */
-  saveDataUser(id: string, token: string, usuario: Usuario) {
+  saveDataUser(id: string, token: string, usuario: Usuario, menu: any) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
-
+    localStorage.setItem('menu', JSON.stringify(menu));
     this.token = token;
     this.usuario = usuario;
+    this.menu = menu;
   }
 
   /**
@@ -73,7 +82,7 @@ export class UsuarioService {
     const url = `${URL_SERVICES}/login/google`;
     return this.http.post(url, {token})
                 .map( (res: any) => {
-                  this.saveDataUser(res.usuario._id, res.token, res.usuario);
+                  this.saveDataUser(res.usuario._id, res.token, res.usuario, res.menu);
                   return true;
                 });
 }
@@ -88,6 +97,10 @@ export class UsuarioService {
             .map( (res: any) => {
               Swal('Usuario creado', `Con el correo: ${ usuario.email}`, 'success');
               return res.usuario;
+            })
+            .catch ( err => {
+              Swal('Error al ingresar', 'Credenciales incorrectas', 'error' );
+              return Observable.throw(err);
             });
   }
 
@@ -105,8 +118,12 @@ export class UsuarioService {
     const url = `${URL_SERVICES}/login`;
     return this.http.post(url, usuario)
           .map( (res: any) => {
-            this.saveDataUser(res.usuario._id, res.token, res.usuario);
+            this.saveDataUser(res.usuario._id, res.token, res.usuario, this.menu);
             return true;
+          })
+          .catch ( err => {
+            Swal('Error al ingresar', 'Credenciales incorrectas', 'error' );
+            return Observable.throw(err);
           });
   }
 
@@ -119,11 +136,15 @@ export class UsuarioService {
     return this.http.put(url, usuario)
               .map( (res: any) => {
                 if (usuario._id === this.usuario._id) {
-                  this.saveDataUser(res.usuario._id, this.token, res.usuario);
+                  this.saveDataUser(res.usuario._id, this.token, res.usuario, this.menu);
                 }
                 Swal('Datos Actualizados', `Se actualizo el usuario: ${ usuario.nombre}`, 'success');
                 return true;
-              });
+              })
+            .catch ( err => {
+              Swal('Error al ingresar', 'Credenciales incorrectas', 'error' );
+              return Observable.throw(err);
+            });
   }
 
   /**
@@ -136,7 +157,7 @@ export class UsuarioService {
           .then( (res: any) => {
             Swal('Datos Actualizados', `Se actualizo exitosamente la imagen`, 'success');
             this.usuario.img = res.usuario.img;
-            this.saveDataUser(id, this.token, this.usuario);
+            this.saveDataUser(id, this.token, this.usuario, this.menu);
           });
   }
 

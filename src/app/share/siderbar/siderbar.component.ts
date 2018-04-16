@@ -18,6 +18,7 @@ export class SiderbarComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = this._userServices.usuario;
+    this._sb.loadMenu();
   }
 
 }
